@@ -21,3 +21,4 @@ while len(queue) != 0:
                 queue.append(edge[1])
                 
 print(answer - 1)
+print(answer)
