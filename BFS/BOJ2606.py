@@ -10,14 +10,20 @@ for _ in range(edge):
     
 queue = deque()
 queue.append(1)
-answer = 0
+visited = [False for _ in range(len(lst))]
+answer = []
 
 while len(queue) != 0:
-    answer += 1
     now = queue.popleft()
-    for edge in lst:
-        if edge[0] == now:
-            if edge[1] not in queue:
-                queue.append(edge[1])
-                
-print(answer - 1)
+    if now not in answer:
+        answer.append(now)
+    for edge in range(len(lst)):
+        if lst[edge][0] == now and visited[edge] == False:
+            if lst[edge][1] not in queue:
+                queue.append(lst[edge][1])
+                visited[edge] = True
+        elif lst[edge][1] == now and visited[edge] == False:
+            if lst[edge][0] not in queue:
+                queue.append(lst[edge][0])
+                visited[edge] = True
+print(len(answer) - 1)
