@@ -1,11 +1,12 @@
 #데이터 입력 받아오기
 #node는 컴퓨터의 개수, edge는 연결 간선의 개수
-node, edge = map(int, input().split())
+import sys
+node, edge = map(int, sys.stdin.readline().split())
 
 #graph에다가 edge 개수만큼의 입력을 받아온다
 graph = []
 for _ in range(edge):
-    graph.append(list(map(int, input().split())))
+    graph.append(list(map(int, sys.stdin.readline().split())))
     
 # node 개수 만큼의 컴퓨터가 있을 때,
 # 한 컴퓨터가 총 해킹할 수 있는 컴퓨터를 값으로 넣기 위한 dictionary
