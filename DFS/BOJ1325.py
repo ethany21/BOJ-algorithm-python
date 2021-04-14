@@ -7,7 +7,8 @@ for _ in range(edge):
 dic = {}
 
 for i in range(1, node+1):
-    dic[i] = 1
+    # dic[i] = 1
+    dic[i] = [i]
 
 def dfs(graph, first, original):
     visited = [False for _ in range(edge)]
@@ -20,7 +21,9 @@ def dfs(graph, first, original):
 
     for i in range(edge):
         if graph[i][1] == first and not visited[i]:
-            dic[original] += 1
+
+            dic[original].append(graph[i][0])
+            # dic[original] += 1
             first = graph[i][0]
             visited[i] = True
             dfs(graph, first, original)
@@ -31,11 +34,15 @@ for i in range(1, node+1):
     dfs(graph, i, i)
 
 max = 0
+for i in dic.keys():
+    if len(dic[i]) > max:
+        max = len(dic[i])
+
+answer = []
 
 for i in dic.keys():
-    if dic[i] > max:
-        max = dic[i]
-
-for i in dic.keys():
-    if dic[i] == max:
-        print(i, end= ' ')
+    if len(dic[i]) == max:
+        answer.append(i)
+answer.sort()
+for i in answer:
+    print(i, end=' ')
