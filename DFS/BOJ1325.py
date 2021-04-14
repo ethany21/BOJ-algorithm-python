@@ -1,5 +1,5 @@
-#데이터 입력 받아오기
-#node는 컴퓨터의 개수, edge는 연결 간선의 개수
+# 데이터 입력 받아오기
+# node는 컴퓨터의 개수, edge는 연결 간선의 개수
 import sys
 node, edge = map(int, sys.stdin.readline().split())
 
@@ -10,7 +10,6 @@ for _ in range(edge):
     
 # node 개수 만큼의 컴퓨터가 있을 때,
 # 한 컴퓨터가 총 해킹할 수 있는 컴퓨터를 값으로 넣기 위한 dictionary
-# 
 
 dic = {}
 for i in range(1, node+1):
@@ -33,9 +32,7 @@ def dfs(graph, first, original, visited):
 
     for i in range(edge):
         if graph[i][1] == first and not visited[i]:
-
             dic[original].append(graph[i][0])
-            # dic[original] += 1
             first = graph[i][0]
             visited[i] = True
             dfs(graph, first, original, visited)
