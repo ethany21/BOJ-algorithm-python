@@ -1,7 +1,7 @@
 from itertools import combinations
 from collections import deque
 
-N, M = map(int, input().split())
+# N, M = map(int, input().split())
 
 graph = []
 count = 0
@@ -21,11 +21,19 @@ for i in range(N):
             count += 1
             cords.append([i, j])
 
+
 cands = list(combinations(cords, 3))
 
-for i in range(cands):
+for comb in range(cands):
+
     queue = deque()
 
+    for cord in comb:
+        graph[cord[0]][cord[1]] = 1
+
+    while queue:
+        
+    
 
 
 
