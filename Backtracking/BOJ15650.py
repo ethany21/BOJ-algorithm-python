@@ -22,7 +22,7 @@ def dfs(visited, lst, count, temp, idx):
                 dfs(visited, lst, count, temp, idx)
                 del temp[-1]
                 visited[i] = False
-            idx += 1q
+            idx += 1
 
 dfs(visited, lst, M, [], 0)
 
