@@ -59,7 +59,3 @@ for comb in range(len(cands)):
             if box[i][j] == 0:
                 answers[comb] += 1
 print(max(answers))
-        
-
-
-
