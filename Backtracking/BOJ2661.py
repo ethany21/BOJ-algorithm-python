@@ -16,18 +16,20 @@ def check(temp):
 
     return result   
 
-def dfs(N, temp):
-    if len(temp) == N:
-        answer = "".join([str(_) for _ in temp])
-        cand.append(int(answer))
+def dfs(N, temp, cand):
+    if len(cand) == 1:
         return
     else:
-        for i in range(3):
-            temp.append(array[i])
-            if not check(temp):
-                dfs(N, temp)
-            del temp[-1]
-                
-dfs(N,[])
-print(min(cand))
+        if len(temp) == N:
+            answer = "".join([str(_) for _ in temp])
+            cand.append(int(answer))
+            return
+        else:
+            for i in range(3):
+                temp.append(array[i])
+                if not check(temp):
+                    dfs(N, temp, cand)
+                del temp[-1]  
+dfs(N, [], cand)
+print(cand[0])
 
