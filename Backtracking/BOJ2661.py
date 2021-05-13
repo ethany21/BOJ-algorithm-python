@@ -1,27 +1,33 @@
-# N = int(input())
-
-array = [1, 2, 3]
-visited = [False for _ in range(3)]
+N = int(input())
 
 cand = []
-
-## temp는 리스트로, 쌓으면서 앞 원소들과 비교해 본다
-def dfs(visited, N, count, temp):
-    pass
+array = [1, 2, 3]
 
 def check(temp):
 
     result = False
 
-    for i in range(int(len(temp)/2)):
+    for i in range(1,int(len(temp)/2) + 1):
         front = temp[-i*2:-i]
-        back = temp[-i:-1]
+        back = temp[-i:]
         if front == back:
             result = True
             break
 
-    return result
+    return result   
 
-print(int(3/2))
-print(check([1,3,3]))
+def dfs(N, temp):
+    if len(temp) == N:
+        answer = "".join([str(_) for _ in temp])
+        cand.append(int(answer))
+        return
+    else:
+        for i in range(3):
+            temp.append(array[i])
+            if not check(temp):
+                dfs(N, temp)
+            del temp[-1]
+                
+dfs(N,[])
+print(min(cand))
 
