@@ -32,4 +32,3 @@ def dfs(N, temp, cand):
                 del temp[-1]  
 dfs(N, [], cand)
 print(cand[0])
-
