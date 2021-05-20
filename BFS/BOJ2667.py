@@ -26,15 +26,17 @@ for i in range(N):
                     temp.append(queue.popleft())
                 for cord in temp:
                     a , b = cord[0], cord[1]
-                    for i in range(4):
-                        x = a + dx[i]
-                        y = b + dy[i]
+                    for k in range(4):
+                        x = a + dx[k]
+                        y = b + dy[k]
                         if 0 <= x < N and 0 <= y < N and graph[x][y] == 1 and not visited[x][y]:
                             visited[x][y] = True
                             queue.append([x, y])
                             count +=1
             answer.append(count)
+
 answer.sort()
 print(len(answer))
 for i in answer:
     print(i)
+
