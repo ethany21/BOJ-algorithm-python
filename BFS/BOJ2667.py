@@ -9,7 +9,7 @@ dx = [1, -1, 0, 0]
 dy = [0, 0, -1, 1]
 
 for _ in range(N):
-    graph.append(list(map(int, input().split())))
+    graph.append(list(map(int, input())))
 
 for _ in range(N):
     visited.append([False for _ in range(N)])
@@ -17,7 +17,7 @@ for _ in range(N):
 for i in range(N):
     for j in range(N):
         visited[i][j] == True
-        if graph[i][j] == 1 and not visited[i][j]:
+        if graph[i][j] == 1:
             queue = deque()
             queue.append([i, j])
             count = 0
