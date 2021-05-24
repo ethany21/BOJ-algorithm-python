@@ -1,31 +1,51 @@
-import sys
+from collections import deque
 
 def solution(n, edge):
+    
     answer = 0
+    dic = {}
+    dist = 0
+    visited = [False for _ in range(n)]
+    queue = deque()
+    count = 0
+    distance = {}
     
-    d = []
+    for i in range(1, n+1):
+        for j in range(len(edge)):
+            if i in edge[j]:
+                value = 0
+                if edge[j][0] == i:
+                    value = edge[j][1]
+                else:
+                    value = edge[j][0]
+                if i not in dic.keys():
+                    dic[i] = [value]
+                else:
+                    dic[i].append(value)
     
-    for i in range(n):
-        d.append([sys.maxsize for _ in range(n)])
+    queue.append(1)
     
-    for i in edge:
-        i.sort()
+    while queue:
+        temp = []
+        while len(queue) > 0:
+            temp.append(queue.popleft())
+            
+        for node in temp:
+            if not visited[node-1]:
+                visited[node-1] = True
+            
+            distance[node] = count
+            
+            for i in dic[node]:
+                if not visited[i-1]:
+                    queue.append(i)
+                    visited[i-1] = True
+        count += 1
     
-    for i in range(n):
-        for j in range(n):
-            if [i+1, j+1] in edge:
-                d[i][j] = 1
-                d[j][i] = 1
+    max_value = max(distance.values())
     
+    for i in range(1, n+1):
+        if distance[i] == max_value:
+            answer +=1
     
-    for k in range(n):
-        for i in range(n):
-            for j in range(n):
-                if d[i][k] + d[k][j] < d[i][j]:
-                    d[i][j] = d[i][k] + d[k][j]
-    temp = d[0]
-    del temp[0]
-    
-    answer = temp.count(max(temp))
-
     return answer
