@@ -11,21 +11,20 @@ def solution(n, edge):
     distance = {}
     
     for i in range(1, n+1):
-        for j in range(len(edge)):
-            if i in edge[j]:
-                value = 0
-                if edge[j][0] == i:
-                    value = edge[j][1]
-                else:
-                    value = edge[j][0]
-                if i not in dic.keys():
-                    dic[i] = [value]
-                else:
-                    dic[i].append(value)
+        dic[i] = []
+    
+    for i in edge:
+        dic[i[0]].append(i[1])
+        dic[i[1]].append(i[0])
     
     queue.append(1)
     
     while queue:
+        
+        if visited.count(True) == n:
+            answer = len(queue)
+            break
+        
         temp = []
         while len(queue) > 0:
             temp.append(queue.popleft())
@@ -40,12 +39,7 @@ def solution(n, edge):
                 if not visited[i-1]:
                     queue.append(i)
                     visited[i-1] = True
+                
         count += 1
-    
-    max_value = max(distance.values())
-    
-    for i in range(1, n+1):
-        if distance[i] == max_value:
-            answer +=1
     
     return answer
