@@ -28,6 +28,7 @@ def mergeSort_ASC(arr):
             arr[k] = right_half[j]
             j += 1
             k += 1
+
 def merge_sorted(arr):
     if len(arr) > 1:
         mid = len(arr)//2
@@ -59,11 +60,12 @@ def merge(left, right):
     while j < len(right):
         arr.append(right[j])
         j += 1
-
+        
     return arr
 
 
-print(lst)
-mergeSort_ASC(lst)
-print("Sorted Result is : " , lst)
+print("First Sorted Version is : ", merge_sorted(lst))
+print("Original List Before Sorted is : ", lst)
+# mergeSort_ASC(lst)
+# print("Second Sorted Version is : " , lst)
 
