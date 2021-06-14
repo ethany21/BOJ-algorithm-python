@@ -6,5 +6,14 @@ def solution(n, times):
     while left <= right:
         mid = (left + right)//2
         people = 0
+
+        for x in times:
+            if mid > x:
+                people += mid//x
+        if people >= n:
+            answer = mid
+            right = mid - 1
+        else:
+            left = mid + 1
     
     return answer
