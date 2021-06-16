@@ -3,14 +3,27 @@ def solution(distance, rocks, n):
 
     rocks.append(distance)
     rocks.append(0)
-
     rocks.sort()
-
-    difference = []
-
-    for i in range(1, len(rocks)):
-        difference.append(rocks[i] - rocks[i-1])
+        
+    left, right = 0, distance
+    
+    while left <= right:
+        
+        mid = (left + right)//2
+        pivot = 0
+        removal = 0
+        
+        for i in range(1, len(rocks)):
+            if rocks[i] - rocks[pivot] < mid:
+                removal += 1
+            else:
+                pivot = i
+                
+        if removal >= n:
+            answer = mid
+            right = mid - 1
+            
+        elif removal < n:
+            left = mid + 1
 
     return answer
-
-solution(25, [2, 14, 11, 21, 17], 2)
