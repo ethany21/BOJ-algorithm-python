@@ -29,6 +29,18 @@ def ancestor(parents, node):
 def solution2(n, costs):
 
     answer = 0
+    parents = [i for i in range(n)]
+    edges = sorted([(x[2], x[1], x[0]) for x in costs])
+    count = 0
 
+    for cost in edges:
+        l, e, s  = cost
+        if ancestor(parents, e) != ancestor(parents, s):
+            answer += l
+            count += 1
+            parents[ancestor(parents, s)] = e
 
+        if count  == n-1:
+            break
+        
     return answer
