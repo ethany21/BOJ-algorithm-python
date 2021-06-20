@@ -1,10 +1,7 @@
 def solution1(n, costs):
     answer = 0
-    
     visited = [0] * n
-
     costs.sorted(key = lambda x: x[2])
-
     visited[0] = 1
 
     while sum(visited) != n:
