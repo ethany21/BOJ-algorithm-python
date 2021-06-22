@@ -1,31 +1,27 @@
 n, edge = map(int, input().split())
 
-graph =[]
+graph =[[0 for _ in range(n+1)] for _ in range(n+1)]
 total = 0
+edges = []
 for _ in range(edge):
-    graph.append(list(map(int, input().split())))
+    x,y, cost = map(int, input().split())
+    edges.append([x,y,cost])
+    graph[x][y] = cost
+    graph[y][x] = cost
+    total += cost
 
-for i in range(len(graph)):
-    total += graph[i][-1]
 
 parent = [i for i in range(n)]
-edges = sorted([(x[2], x[1], x[0]) for x in graph])
+edges = sorted([(x[2], x[1], x[0]) for x in edges])
 count = 0
 answer = 0
 visited = [0 for i in range(n + 1)]
 check = 0
 
-another = [[0 for _ in range(1+n)] for _ in range(n+1)]
-for i in range(len(graph)):
-    a, b, c = graph[i]
-    another[a][b] = 1
-    another[b][a] = 1
-
-
 def dfs(i):
     visited[i] = 1
     for j in range(1, n+1):
-        if another[i][j] == 1 and visited[j] == 0:
+        if graph[i][j] != 0 and visited[j] == 0:
             dfs(j)
 
 def check_link(check):
