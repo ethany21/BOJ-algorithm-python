@@ -1,58 +1,47 @@
 n, edge = map(int, input().split())
 
-graph =[[0 for _ in range(n+1)] for _ in range(n+1)]
+graph =[]
 total = 0
-edges = []
 for _ in range(edge):
     x,y, cost = map(int, input().split())
-    edges.append([x,y,cost])
-    graph[x][y] = cost
-    graph[y][x] = cost
+    graph.append([x,y,cost])
     total += cost
 
-
-parent = [i for i in range(n)]
-edges = sorted([(x[2], x[1], x[0]) for x in edges])
+parent = [i for i in range(n +1)]
+edges = sorted([(x[2], x[1], x[0]) for x in graph])
 count = 0
 answer = 0
-visited = [0 for i in range(n + 1)]
-check = 0
 
-def dfs(i):
-    visited[i] = 1
-    for j in range(1, n+1):
-        if graph[i][j] != 0 and visited[j] == 0:
-            dfs(j)
+def ancestor(parent, x):
+    result = x
+    while parent[result] != result:
+        result = parent[result]
+    parent[x] = result
+    return parent[x]
 
-def check_link(check):
-    for i in range(1, n+1):
-        if visited[i] != 1:
-            dfs(i)
-            check +=1
-    if check != 1:
+def union_find(x, y):
+    X = ancestor(parent, x)
+    Y = ancestor(parent, y)
+    if X == Y:
         return False
-    else:
-        return True
+    parent[X] = Y
+    return True
 
-def ancestor(parent, node):
-    if parent[node] == node:
-        return node
-    else:
-        return ancestor(parent, parent[node])
-
-def greed(parent, edges, count, answer):
+def greed(edges, answer):
     for node in edges:
         cost, start, end = node
-        if ancestor(parent, start-1) != ancestor(parent, end-1):
-            count += 1
+        if union_find(start, end):
             answer += cost
-            parent[ancestor(parent, end-1)] = start-1
-        if count == n-1:
-            break
     
     return total - answer
+print(greed(edges, answer))
+print(parent)
+for i in range(n):
+    if i == parent[i]:
+        count +=1
+print(count)
 
-if check_link(check):
-    print(greed(parent, edges, count, answer))
-else:
-    print(-1)
+# if check_link(check):
+#     print(greed(parent, edges, count, answer))
+# else:
+#     print(-1)
