@@ -1,11 +1,22 @@
 N = int(input())
 
-schedule = []
+time, pay = [], []
+dp = [0] * (1+N)
 
 for _ in range(N):
-    schedule.append(list(map(int, input().split())))
+    a,b = map(int, input().split())
+    time.append(a)
+    pay.append(b)
 
-pay = 0
+MAX = 0
+
+for i in range(N):
+    MAX = max(MAX, dp[i])
+    if i + time[i] <= N:
+        dp[i + time[i]] = max(MAX + pay[i], dp[i + time[i]])
+
+print(max(dp))
+
 
 
 
